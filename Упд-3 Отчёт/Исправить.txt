@@ -1,0 +1,83 @@
+PdfReaderApp
++-------------------+
+| PdfReaderApp      |
++-------------------+
+| - root: Tk        |
+| - pdf_document: fitz.Document |
+| - pdf_path: str    |
+| - current_page_num: int |
+| - total_pages: int |
+| - playing_thread: threading.Thread |
+| - stop_playback_flag: threading.Event |
+| - speech_speed: float |
+| - temp_audio_files: list[str] |
+| - playback_was_stopped: bool |
+| - text_display: ScrolledText |
+| - status_label: Label |
+| - voice_combobox: Combobox |
++-------------------+
+| + __init__(root_window: Tk) |
+| + select_pdf()              |
+| + play_range()              |
+| + stop_audio()              |
+| + save_full_audio_to_mp3()  |
+| + save_stopped_audio_to_mp3() |
+| + cleanup_temp_files(keep_parent_dir: bool, parent_dir_path: str) |
+| + highlight_text(full_text: str, chunk: str) |
+| + update_status(message: str) |
+| + on_closing()              |
++-------------------+
+
+Класс fitz.Document (внешний класс)
++-------------------+
+| fitz.Document     |
++-------------------+
+| - filePath: str   |
+| - pageCount: int  |
+| - currentPage: int|
+| - text: str       |
++-------------------+
+| + load_page(page_num: int) -> Page |
+| + close()                         |
+| + get_text(option: str) -> str    |
++-------------------+
+Класс tts_model (внешний класс)
++-------------------+
+| tts_model         |
++-------------------+
+| - textInput: str  |
+| - audioOutput: str|
+| - language: str   |
+| - voiceType: str  |
++-------------------+
+| + apply_tts(text: str, speaker: str, sample_rate: int, put_accent: bool, put_yo: bool) -> np.ndarray |
++-------------------+
++------------
+
+Класс ScrolledText (внешний класс)
+
+-------+
+| ScrolledText      |
++-------------------+
+| - textContent: str|
+| - highlightedText: list[str] |
+| - isActive: bool  |
+| - scrollPosition: int |
++-------------------+
+| + insert(index: str, text: str) |
+| + delete(start: str, end: str)  |
+| + config(state: str)            |
+| + get(start: str, end: str) -> str |
++-------------------+
+
+
+Класс Label (внешний класс)
++-------------------+
+| Label             |
++-------------------+
+| - statusText: str |
+| - isVisible: bool |
++-------------------+
+| + config(text: str) |
+| + cget(option: str) -> str |
++-------------------+
